@@ -18,18 +18,14 @@ const defaultState = {
   comments
 };
 
-// Setup store to be aware by redux dev Tools in chrome
-const enhancers = compose(
-  window.devToolsExtension ? window.devToolsExtension() : (f) => (f)
-);
-
 // Preconfigure firebase store
 const createStoreWithFirebase = compose(
+    window.devToolsExtension ? window.devToolsExtension() : (f) => (f),
     reduxReactFirebase(Firebase_Config, { userProfile: 'users' })
 )(createStore);
 
 // Create firebase store
-const store = createStoreWithFirebase( rootReducer, defaultState, enhancers );
+const store = createStoreWithFirebase( rootReducer, defaultState );
 
 //const store = createStore( rootReducer, defaultState, enhancers );
 
